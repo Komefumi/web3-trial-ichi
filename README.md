@@ -2,4 +2,14 @@
 
 Basic Web3 Project
 
-Description to be added
+Transfers funds from specified contract (assumed to have a 'transferFunds' function), to desired wallet
+
+Note: Made using bun!
+
+## Usage
+
+```bash
+bun index.ts
+```
+
+TODO: Make work using standard node.js
