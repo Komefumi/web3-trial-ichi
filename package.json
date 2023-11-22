@@ -1,9 +1,13 @@
 {
   "name": "web3-trial-ichi",
   "module": "index.ts",
-  "type": "module",
+  "scripts": {
+    "run:node": "tsx index.ts"
+  },
   "devDependencies": {
-    "bun-types": "latest"
+    "@types/node": "^20.9.4",
+    "bun-types": "latest",
+    "tsx": "^4.2.0"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"

@@ -12,4 +12,10 @@ Note: Made using bun!
 bun index.ts
 ```
 
+or with node
+
+```bash
+npm run run:node
+```
+
 TODO: Make work using standard node.js

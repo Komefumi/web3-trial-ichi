@@ -1,3 +1,4 @@
+import "dotenv/config";
 import { ethers, parseUnits, parseEther } from "ethers";
 
 const provider = new ethers.JsonRpcProvider(
@@ -51,22 +52,24 @@ const contractInstance = new ethers.Contract(
 
 const coder = ethers.AbiCoder.defaultAbiCoder();
 const transferPayload = coder.encode(["uint256"], [parseEther("1")]);
-const gasEstimate = await wallet.estimateGas({
-  to: contractAddress,
-  data: contractInstance.interface.encodeFunctionData("transferFunds", [
+(async () => {
+  const gasEstimate = await wallet.estimateGas({
+    to: contractAddress,
+    data: contractInstance.interface.encodeFunctionData("transferFunds", [
+      walletAddress,
+      transferPayload,
+    ]),
+  });
+
+  const transaction = await contractInstance.transferFunds!(
     walletAddress,
     transferPayload,
-  ]),
-});
+    {
+      gasLimit: gasEstimate, // Adding some margin
+      gasPrice: parseUnits("50", "gwei"), // Replace with your desired gas price
+    }
+  );
 
-const transaction = await contractInstance.transferFunds(
-  walletAddress,
-  transferPayload,
-  {
-    gasLimit: gasEstimate, // Adding some margin
-    gasPrice: parseUnits("50", "gwei"), // Replace with your desired gas price
-  }
-);
-
-const receipt = await transaction.wait();
-console.log("Transaction mined:", receipt);
+  const receipt = await transaction.wait();
+  console.log("Transaction mined:", receipt);
+})();
