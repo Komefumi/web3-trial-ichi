@@ -9,13 +9,13 @@ Note: Made using bun!
 ## Usage
 
 ```bash
-bun index.ts
+bun <desired-script>
 ```
 
 or with node
 
 ```bash
-npm run run:node
+npx tsx <desired-script>
 ```
 
 TODO: Make work using standard node.js
